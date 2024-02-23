@@ -7,14 +7,31 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Auth: typeof import('./src/components/Auth.vue')['default']
+    Account: typeof import('./src/components/auth/formItem/Account.vue')['default']
+    Auth: typeof import('./src/components/auth/Auth.vue')['default']
+    AuthForm: typeof import('./src/components/auth/form/AuthForm.vue')['default']
+    CheckCode: typeof import('./src/components/auth/formItem/CheckCode.vue')['default']
     CustomDialog: typeof import('./src/components/CustomDialog.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElDialog: typeof import('element-plus/es')['ElDialog']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSpace: typeof import('element-plus/es')['ElSpace']
+    EmailCode: typeof import('./src/components/auth/formItem/EmailCode.vue')['default']
+    ForgetForm: typeof import('./src/components/auth/form/ForgetForm.vue')['default']
+    LoginForm: typeof import('./src/components/auth/form/LoginForm.vue')['default']
+    Nickname: typeof import('./src/components/auth/formItem/Nickname.vue')['default']
+    Password: typeof import('./src/components/auth/formItem/Password.vue')['default']
+    RegForm: typeof import('./src/components/auth/form/RegForm.vue')['default']
+    Remember: typeof import('./src/components/auth/formItem/Remember.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Submit: typeof import('./src/components/auth/formItem/Submit.vue')['default']
+    SubmitForm: typeof import('./src/components/auth/formItem/SubmitForm.vue')['default']
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <CustomDialog v-model:visible="dialogVisible" :buttons="buttons">
-      <div style="height: 1500px">1231312313231332</div>
+    <CustomDialog v-model:visible="dialogVisible" :title="authFormRef?.title || '标题'">
+      <AuthForm v-if="dialogVisible" ref="authFormRef"></AuthForm>
     </CustomDialog>
   </div>
 </template>
@@ -20,16 +20,7 @@ const dialogVisible = computed({
     emit('update:visible', val);
   },
 });
-const buttons = reactive<DialogButton[]>([
-  {
-    text: '确定',
-    type: 'primary',
-  },
-  {
-    text: '123',
-    type: 'default',
-  },
-]);
+const authFormRef = ref<any | null>(null);
 </script>
 
 <style scoped lang="scss"></style>

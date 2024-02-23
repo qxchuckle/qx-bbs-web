@@ -2,7 +2,7 @@
   <div class="dialog">
     <el-dialog
       v-model:model-value="showDialog"
-      title="Tips"
+      :title="title"
       :show-close="showClose"
       :draggable="false"
       :close-on-click-modal="false"
@@ -15,11 +15,11 @@
       </el-scrollbar>
       <template v-if="showCancel || (buttons && buttons.length)">
         <div class="dialog-footer">
-          <el-button v-if="showCancel" @click="close" size="small" type="default">取消</el-button>
+          <el-button v-if="showCancel" @click="close" size="default" type="default">取消</el-button>
           <el-button
             v-for="(button, index) in buttons"
             :key="index"
-            size="small"
+            size="default"
             :type="button.type || 'primary'"
             @click="button.click"
           >
@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import { type DialogButton } from '@/type/index';
 const props = defineProps({
   visible: {
     type: Boolean,
@@ -39,7 +40,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: '',
+    default: '标题',
   },
   showClose: {
     type: Boolean,
@@ -73,13 +74,16 @@ const close = () => {
     margin: 50px auto 0px;
     padding: 0;
     .el-dialog__header {
-      padding: 10px 20px;
+      padding: 15px 20px 10px;
       border-bottom: 1px solid #add;
+      .el-dialog__headerbtn {
+        top: 6px;
+      }
     }
     .dialog-body {
       min-width: 300px;
       min-height: 100px;
-      padding: 5px 10px;
+      padding: 15px;
     }
     .dialog-footer {
       padding: 10px 20px;

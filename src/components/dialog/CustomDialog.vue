@@ -6,10 +6,12 @@
       :show-close="showClose"
       :draggable="false"
       :close-on-click-modal="false"
-      width="fit-content"
+      width="100%"
+      class="dialog-panel"
+      :style="{ 'max-width': maxWidth }"
     >
       <el-scrollbar max-height="calc(100vh - 160px)">
-        <div class="dialog-body">
+        <div class="dialog-body" :style="{ 'min-width': minWidth }">
           <slot></slot>
         </div>
       </el-scrollbar>
@@ -32,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { type DialogButton } from '@/type/index';
+import { DialogButton } from '@/type/index';
 const props = defineProps({
   visible: {
     type: Boolean,
@@ -54,6 +56,16 @@ const props = defineProps({
     type: Array<DialogButton>,
     default: () => [],
   },
+  // 面板最大宽度
+  maxWidth: {
+    type: String,
+    default: '500px',
+  },
+  // 内容最小宽度，超出滚动
+  minWidth: {
+    type: String,
+    default: '300px',
+  },
 });
 const emit = defineEmits(['update:visible']);
 
@@ -70,6 +82,9 @@ const close = () => {
 
 <style lang="scss">
 .dialog {
+  .dialog-panel {
+    margin: 0 auto;
+  }
   .el-dialog {
     margin: 50px auto 0px;
     padding: 0;
@@ -81,7 +96,6 @@ const close = () => {
       }
     }
     .dialog-body {
-      min-width: 300px;
       min-height: 100px;
       padding: 15px;
     }

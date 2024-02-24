@@ -1,6 +1,6 @@
 <template>
   <el-form-item :prop="prop">
-    <el-input v-model="value" :placeholder="placeholder" show-password clearable>
+    <el-input v-model="value" :placeholder="placeholder" show-password clearable size="large">
       <template #prefix>
         <i class="iconfont icon-password"></i>
       </template>

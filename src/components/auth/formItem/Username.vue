@@ -1,6 +1,6 @@
 <template>
   <el-form-item :prop="prop">
-    <el-input v-model="value" :placeholder="placeholder" clearable>
+    <el-input v-model="value" :placeholder="placeholder" clearable size="large">
       <template #prefix>
         <i class="iconfont icon-account"></i>
       </template>
@@ -16,7 +16,7 @@ const props = defineProps({
   },
   prop: {
     type: String,
-    default: 'nickname',
+    default: 'username',
   },
   placeholder: {
     type: String,

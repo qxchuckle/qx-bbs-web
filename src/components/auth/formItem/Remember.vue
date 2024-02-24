@@ -1,6 +1,6 @@
 <template>
-  <el-form-item style="margin-bottom: 15px" prop="prop">
-    <el-checkbox v-model="value">记住我</el-checkbox>
+  <el-form-item style="margin-bottom: 15px" prop="prop" size="large">
+    <el-checkbox v-model="value" class="check">记住我</el-checkbox>
   </el-form-item>
 </template>
 
@@ -24,4 +24,8 @@ const value = computed({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.check {
+  height: fit-content;
+}
+</style>

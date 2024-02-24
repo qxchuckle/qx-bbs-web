@@ -1,12 +1,12 @@
 <template>
   <el-form-item :prop="prop">
     <div class="flex-panel">
-      <el-input v-model="value" :placeholder="placeholder">
+      <el-input v-model="value" :placeholder="placeholder" :maxlength="5" size="large" clearable>
         <template #prefix>
           <i class="iconfont icon-checkcode"></i>
         </template>
       </el-input>
-      <div class="code-box" @click="changeCheckCode(0)">
+      <div class="code-box" @click="changeCheckCode(type)">
         <img :src="checkCodeUrl" alt="验证码" />
       </div>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script setup lang="ts">
+import { CheckCodeType } from '@/type';
 const props = defineProps({
   modelValue: {
     type: String,
@@ -27,6 +28,10 @@ const props = defineProps({
     type: String,
     default: '请输入验证码',
   },
+  type: {
+    type: Number,
+    default: CheckCodeType.auth,
+  },
 });
 const emit = defineEmits(['update:modelValue']);
 const value = computed({
@@ -35,10 +40,17 @@ const value = computed({
     emit('update:modelValue', val);
   },
 });
-const checkCodeUrl = ref(authApi.checkCode);
-const changeCheckCode = (type: number | string) => {
-  checkCodeUrl.value = `${authApi.checkCode}?type=${type}&time=${Date.now()}`;
+const checkCodeUrl = ref('');
+const changeCheckCode = (type: CheckCodeType) => {
+  // img需要手动加上apiPrefix前缀
+  checkCodeUrl.value = `${apiPrefix}${authApi.checkCode}?type=${type}&time=${Date.now()}`;
 };
+onBeforeMount(() => {
+  changeCheckCode(props.type);
+});
+defineExpose({
+  changeCheckCode,
+});
 </script>
 
 <style scoped lang="scss">

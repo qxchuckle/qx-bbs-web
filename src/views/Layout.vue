@@ -14,8 +14,8 @@
             <el-button type="primary">发帖<i class="iconfont icon-add"></i></el-button>
             <el-button type="primary">搜索<i class="iconfont icon-search"></i></el-button>
             <el-button-group>
-              <el-button type="primary" plain @click="login">登陆</el-button>
-              <el-button type="primary" plain>注册</el-button>
+              <el-button type="primary" plain @click="login">登录</el-button>
+              <el-button type="primary" plain @click="register">注册</el-button>
             </el-button-group>
           </el-space>
         </div>
@@ -24,13 +24,17 @@
     <div class="main">
       <router-view></router-view>
     </div>
-    <!-- 注册登陆 -->
-    <Auth v-model:visible="authVisible"></Auth>
+    <!-- 注册登录 -->
+    <AuthDialog
+      v-model:visible="authVisible"
+      v-model:type="type"
+      max-width="460px"
+      min-width="300px"
+    ></AuthDialog>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { createThrottle } from '@/utils';
 const router = useRouter();
 const route = useRoute();
 const logoText = 'QXBBS'.split('');
@@ -69,7 +73,13 @@ onUnmounted(() => {
 });
 
 const authVisible = ref(false);
+const type = ref(AuthFormType.login);
 const login = () => {
+  type.value = AuthFormType.login;
+  authVisible.value = true;
+};
+const register = () => {
+  type.value = AuthFormType.register;
   authVisible.value = true;
 };
 </script>

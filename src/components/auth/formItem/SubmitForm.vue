@@ -1,6 +1,6 @@
 <template>
   <el-form-item prop="submit">
-    <el-button type="primary" size="default" @click="submit" style="width: 100%"
+    <el-button type="primary" size="default" clearable @click="submit" style="width: 100%"
       >{{ text }}
     </el-button>
   </el-form-item>

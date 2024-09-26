@@ -19,6 +19,8 @@ import type { AuthFormData } from '@/type';
 import type { ElForm } from 'element-plus';
 import type CheckCode from '../formItem/CheckCode.vue';
 import { md5 } from 'js-md5';
+import { VueCookies } from 'vue-cookies';
+const cookie = inject<VueCookies>('$cookies');
 
 const userStore = useUserStore();
 const formData = reactive<AuthFormData>({
@@ -63,7 +65,7 @@ const submitForm = () => {
   formValidate(formRef.value)
     .then(async () => {
       const result = await request({
-        url: authApi.login,
+        url: apiList.auth.login,
         params: {
           email: formData.account,
           password: md5Password,
@@ -77,6 +79,10 @@ const submitForm = () => {
       userStore.$patch((state) => {
         state.username = result.data.nickName;
         state.remember = formData.remember;
+        state.isLogin = true;
+        state.userId = result.data.userId;
+        state.isAdmin = result.data.isAdmin ?? false;
+        state.province = result.data.province ?? '未知';
       });
       // 登录成功
       message.success(`欢迎${result.data.nickName}`);
@@ -86,6 +92,15 @@ const submitForm = () => {
           state.account = formData.account;
           state.password = md5Password;
         });
+        cookie?.set(
+          'loginInfo',
+          {
+            email: formData.account,
+            password: md5Password,
+            rememberMe: formData.remember,
+          },
+          '7d',
+        );
         // 保存到本地
         localStorage.setItem(
           'userInfo',
@@ -94,6 +109,7 @@ const submitForm = () => {
             password: md5Password,
             lastLogin: new Date().getTime(),
             remember: formData.remember,
+            userId: result.data.userId,
           }),
         );
       } else {

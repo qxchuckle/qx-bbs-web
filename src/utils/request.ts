@@ -61,7 +61,14 @@ enum ContentType {
   form = 'application/x-www-form-urlencoded;charset=UTF-8',
 }
 
-export const request = async (options: RequestOptions) => {
+interface resData<T = any> {
+  state: string;
+  code: number;
+  info: string;
+  data: T;
+}
+
+export const request = async <T = any>(options: RequestOptions) => {
   const { url, params, dataType, showLoading = true, errorCallback, showError = true } = options;
   let contentType = ContentType.form;
   const formData = new FormData();
@@ -76,7 +83,7 @@ export const request = async (options: RequestOptions) => {
     'X-Requested-With': 'XMLHttpRequest',
   };
   try {
-    const result = await service.post(url, formData, {
+    const result = await service.post<any, resData<T>>(url, formData, {
       headers,
       showLoading,
       errorCallback,

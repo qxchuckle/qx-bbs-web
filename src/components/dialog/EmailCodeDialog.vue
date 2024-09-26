@@ -79,7 +79,7 @@ const buttons: DialogButton[] = [
       formValidate(formRef.value)
         .then(async () => {
           const result = await request({
-            url: authApi.sendMailCode,
+            url: apiList.auth.sendMailCode,
             params: {
               email: props.email,
               checkCode: formData.checkCode,

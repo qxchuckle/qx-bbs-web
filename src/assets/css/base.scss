@@ -56,15 +56,40 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+  outline: none;
+}
+
+html {
+  font-size: 12px;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  position: absolute;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #409eff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: 0 0
 }
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: #363636;
+  background-color: $LightGray;
   transition:
-    color 0.5s,
-    background-color 0.5s;
+    color 0.3s,
+    background-color 0.3s;
   line-height: 1.6;
   font-family:
     Inter,
@@ -79,12 +104,21 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #363636;
+  -webkit-transition:
+    color 0.3s,
+    background-color 0.3s;
+  -moz-transition:
+    color 0.3s,
+    background-color 0.3s;
+  -ms-transition:
+    color 0.3s,
+    background-color 0.3s;
+  -o-transition:
+    color 0.3s,
+    background-color 0.3s;
 }
 
-a {
-  text-decoration: none;
-}

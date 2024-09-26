@@ -1,2 +1,17 @@
 $LayoutWidth: 1300px;
-$AColor: #007fff;
+$Blue: #409eff;
+$Red: #f56c6c;
+$Green: #00c4b6;
+$White: #fff;
+$AColor: $Blue;
+$FontColor: #363636;
+$LightGray: #f2f3f5;
+$FontGrayColor: #8a919f;
+@keyframes progressive {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}

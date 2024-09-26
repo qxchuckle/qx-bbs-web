@@ -57,7 +57,7 @@ const submitForm = () => {
   formValidate(formRef.value)
     .then(async () => {
       const result = await request({
-        url: authApi.register,
+        url: apiList.auth.register,
         params: {
           email: formData.account,
           nickName: formData.username,

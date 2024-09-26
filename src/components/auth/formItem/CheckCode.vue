@@ -43,7 +43,7 @@ const value = computed({
 const checkCodeUrl = ref('');
 const changeCheckCode = (type: CheckCodeType) => {
   // img需要手动加上apiPrefix前缀
-  checkCodeUrl.value = `${apiPrefix}${authApi.checkCode}?type=${type}&time=${Date.now()}`;
+  checkCodeUrl.value = `${apiPrefix}${apiList.auth.checkCode}?type=${type}&time=${Date.now()}`;
 };
 onBeforeMount(() => {
   changeCheckCode(props.type);

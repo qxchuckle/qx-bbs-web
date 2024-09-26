@@ -54,7 +54,7 @@ const submitForm = () => {
   formValidate(formRef.value)
     .then(async () => {
       const result = await request({
-        url: authApi.resetPwd,
+        url: apiList.auth.resetPwd,
         params: {
           email: formData.account,
           password: formData.password,

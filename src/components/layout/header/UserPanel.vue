@@ -41,7 +41,7 @@
     </div>
     <!-- 注册登录面板 -->
     <AuthDialog
-      v-model:visible="authVisible"
+      v-model:visible="pageStore.isShowLogin"
       v-model:type="type"
       max-width="460px"
       min-width="300px"
@@ -51,15 +51,16 @@
 
 <script setup lang="ts">
 const userStore = useUserStore();
-const authVisible = ref(false);
+const pageStore = usePageStore();
 const type = ref(AuthFormType.login);
+
 const login = () => {
   type.value = AuthFormType.login;
-  authVisible.value = true;
+  pageStore.showLogin();
 };
 const register = () => {
   type.value = AuthFormType.register;
-  authVisible.value = true;
+  pageStore.showLogin();
 };
 </script>
 

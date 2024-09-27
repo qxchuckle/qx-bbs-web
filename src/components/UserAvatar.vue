@@ -40,4 +40,8 @@ const toUserPage = () => {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.user-avatar {
+  line-height: 1;
+}
+</style>

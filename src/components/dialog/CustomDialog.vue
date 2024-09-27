@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog">
+  <teleport to="body">
     <el-dialog
       v-model:model-value="showDialog"
       :title="title"
@@ -30,7 +30,7 @@
         </div>
       </template>
     </el-dialog>
-  </div>
+  </teleport>
 </template>
 
 <script setup lang="ts">
@@ -75,35 +75,42 @@ const showDialog = computed({
     emit('update:visible', val);
   },
 });
+
+// 在显示对话框时禁止页面滚动
+watch(
+  () => showDialog.value,
+  (val) => {
+    toggleHtmlScroll(!val);
+  },
+);
+
 const close = () => {
   showDialog.value = false;
 };
 </script>
 
 <style lang="scss">
-.dialog {
-  .dialog-panel {
-    margin: 0 auto;
+.dialog-panel {
+  margin: 0 auto;
+}
+.el-dialog {
+  margin: 50px auto 0px;
+  padding: 0;
+  .el-dialog__header {
+    padding: 15px 20px 10px;
+    border-bottom: 1px solid #add;
+    .el-dialog__headerbtn {
+      top: 6px;
+    }
   }
-  .el-dialog {
-    margin: 50px auto 0px;
-    padding: 0;
-    .el-dialog__header {
-      padding: 15px 20px 10px;
-      border-bottom: 1px solid #add;
-      .el-dialog__headerbtn {
-        top: 6px;
-      }
-    }
-    .dialog-body {
-      min-height: 100px;
-      padding: 15px;
-    }
-    .dialog-footer {
-      padding: 10px 20px;
-      text-align: right;
-      border-top: 1px solid #add;
-    }
+  .dialog-body {
+    min-height: 100px;
+    padding: 15px;
+  }
+  .dialog-footer {
+    padding: 10px 20px;
+    text-align: right;
+    border-top: 1px solid #add;
   }
 }
 </style>

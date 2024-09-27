@@ -11,6 +11,17 @@ let loading: any = null;
 // 请求前拦截
 service.interceptors.request.use(
   (config: any) => {
+    if (config.needLogin) {
+      const userStore = useUserStore();
+      if (!userStore.isLogin) {
+        return Promise.reject({
+          config,
+          message: '需要登陆',
+          action: 'showLogin',
+          showError: true,
+        });
+      }
+    }
     if (config.showLoading) {
       loading = ElLoading.service({
         lock: true,
@@ -22,28 +33,32 @@ service.interceptors.request.use(
   },
   (error: any) => {
     error.config.showLoading && loading?.close();
-    message.error('请求发送失败');
-    return Promise.reject('请求发送失败');
+    return Promise.reject({ config: error.config, action: null });
   },
 );
 
 // 请求后拦截
 service.interceptors.response.use(
   (res: any) => {
-    const { showLoading, errorCallback, showError } = res.config;
+    const { showLoading, errorCallback, showError = true } = res.config;
     showLoading && loading?.close();
     if (res.data.code === 200) {
       return res.data;
     } else if (res.data.code === 901) {
-      return Promise.reject({ showError: false, message: '登陆超时' });
+      return Promise.reject({ showError: false, message: '登陆超时', action: 'showLogin' });
     } else {
       errorCallback && errorCallback(res.data);
-      return Promise.reject({ showError, message: res.data.info });
+      return Promise.reject({ showError, message: res.data.info, action: null });
     }
   },
   (error: any) => {
-    error.config.showLoading && loading?.close();
-    return Promise.reject({ showError: true, message: '网络异常' });
+    const { showLoading } = error.config;
+    showLoading && loading?.close();
+    return Promise.reject({
+      showError: error.showError,
+      message: error.message || '网络异常',
+      action: error.action,
+    });
   },
 );
 
@@ -54,6 +69,7 @@ interface RequestOptions {
   showLoading?: boolean;
   errorCallback?: Function;
   showError?: boolean;
+  needLogin?: boolean;
 }
 
 enum ContentType {
@@ -69,7 +85,7 @@ interface resData<T = any> {
 }
 
 export const request = async <T = any>(options: RequestOptions) => {
-  const { url, params, dataType, showLoading = true, errorCallback, showError = true } = options;
+  const { url, params, dataType, showLoading = true, errorCallback, needLogin } = options;
   let contentType = ContentType.form;
   const formData = new FormData();
   for (const key in params) {
@@ -87,11 +103,16 @@ export const request = async <T = any>(options: RequestOptions) => {
       headers,
       showLoading,
       errorCallback,
+      needLogin,
     } as any);
     return result;
   } catch (error: any) {
     errorCallback && errorCallback(error);
-    showError && message.error(error.message);
+    error.showError && message.error(error.message);
+    if (error.action === 'showLogin') {
+      const pageStore = usePageStore();
+      pageStore.showLogin();
+    }
     return null;
   }
 };

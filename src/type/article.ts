@@ -30,3 +30,9 @@ export interface AttachmentType {
   fileType: number; // 文件类型 0:压缩包
   integral: number; // 所需积分
 }
+
+// 评论排序枚举
+export enum CommentOrderEnum {
+  new = 0,
+  hot = 1,
+}

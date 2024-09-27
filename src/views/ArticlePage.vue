@@ -50,6 +50,8 @@
 
 <script setup lang="ts">
 const route = useRoute();
+// 更新当前菜单信息
+const menuStore = useMenuStore();
 // 文章列表信息
 const articleListInfo = ref<any>({
   totalCount: 0,
@@ -126,6 +128,12 @@ const loadActive = async (page: number, size: number) => {
 // 初始化加载
 onBeforeMount(() => {
   loadActive(currentPage.value, pageSize.value);
+});
+onUpdated(() => {
+  menuStore.updateCurMenu(
+    parseInt(route.params.pid as string),
+    parseInt(route.params.cid as string),
+  );
 });
 // 监听路由变化，重置页码，触发加载，主要是为了切换板块时重新加载文章
 watch(

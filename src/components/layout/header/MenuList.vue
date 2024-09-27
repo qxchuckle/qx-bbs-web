@@ -5,9 +5,7 @@
       :key="index"
       class="menu-item"
       :class="{
-        active:
-          item.boardId === parseInt($route.params.pid as string) ||
-          item.boardId === parseInt($route.params.cid as string),
+        active: item.boardId === menuStore.curMenu.pid || item.boardId === menuStore.curMenu.cid,
       }"
       @click.stop="toBoard(item.pBoardId, item.boardId)"
     >
@@ -23,6 +21,7 @@
 <script setup lang="ts">
 import { MenuListType } from '@/type';
 const router = useRouter();
+const menuStore = useMenuStore();
 const props = defineProps<{
   menuList: MenuListType[];
 }>();

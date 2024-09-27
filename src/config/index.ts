@@ -33,5 +33,20 @@ export const apiList = {
     loadArticleList: '/api/forum/loadArticle',
     // 获取文章详情
     getArticleDetail: '/api/forum/getArticleDetail',
+    // 文章点赞
+    doLike: '/api/forum/doLike',
+    // 下载附件
+    downloadAttachment: '/api/forum/attachmentDownload',
+    // 获取下载信息，积分、是否下载过
+    downloadAttachmentInfo: '/api/forum/getUserDownloadInfo',
+  },
+  // 评论相关
+  comment: {
+    // 获取文章评论
+    loadComment: '/api/comment/loadComment',
+    // 发表评论
+    addComment: '/api/forum/addComment',
+    // 删除评论
+    deleteComment: '/api/forum/deleteComment',
   },
 };

@@ -43,7 +43,7 @@ const props = defineProps<{
 
 <style scoped lang="scss">
 .article-info {
-  padding: 15px 0 10px;
+  padding: 15px 0;
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: row;
@@ -73,6 +73,15 @@ const props = defineProps<{
         gap: 10px;
         flex-direction: row;
         flex-wrap: wrap;
+        .view {
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          i {
+            margin-top: 3px;
+            margin-left: 5px;
+          }
+        }
       }
     }
   }

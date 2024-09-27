@@ -1,3 +1,7 @@
+export * from './message';
+export * from './request';
+export * from './compute';
+export * from './messageBox';
 import { ElForm } from 'element-plus';
 
 // 防抖
@@ -69,3 +73,27 @@ export const formValidate = (form: Form | null) => {
     }
   });
 };
+
+// 滚动页面到指定位置
+export function goToPosition(id?: string) {
+  if (!id) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  const el = document.querySelector('#' + id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// 禁用或启用页面滚动条
+export function toggleHtmlScroll(scroll: boolean) {
+  document.body.parentElement!.style.overflow = scroll ? '' : 'hidden';
+}
+
+// 从 HTML 字符串提取 Img 标签的 src 属性
+export function getImgSrcFromHtml(html: string) {
+  const imgReg = /<img.*?src="(.*?)".*?>/g;
+  const imgSrc = html.match(imgReg);
+  return imgSrc ? imgSrc.map((item) => item.match(/src="(.*?)"/)![1]) : [];
+}

@@ -68,6 +68,7 @@ onUnmounted(() => {
     margin: 0 auto;
     display: flex;
     align-items: center;
+    padding: 0 10px;
     .logo {
       display: block;
       margin-right: 5px;

@@ -8,9 +8,17 @@ export const useMenuStore = defineStore('menuStore', {
   state: (): {
     // 存储板块菜单信息
     menuList: MenuListType[];
+    curMenu: {
+      cid: number | null;
+      pid: number | null;
+    };
   } => {
     return {
       menuList: [],
+      curMenu: {
+        cid: null,
+        pid: null,
+      },
     };
   },
   // 对状态的操作
@@ -21,6 +29,13 @@ export const useMenuStore = defineStore('menuStore', {
       });
       if (!result) return;
       this.menuList = result.data || [];
+    },
+    // 更新当前菜单
+    updateCurMenu(cid: number | null, pid: number | null) {
+      this.curMenu = {
+        cid,
+        pid,
+      };
     },
   },
   // 相当于计算属性，传入一个store的state作为参数

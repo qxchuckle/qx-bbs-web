@@ -1,20 +1,16 @@
 <template>
   <div class="quick-list">
-    <el-badge :value="articleInfo.goodCount" type="info">
-      <div
-        @click="handleLike(articleInfo.articleId)"
-        class="quick-item"
-        :class="isLike ? 'isLike' : ''"
-      >
+    <el-badge :value="gooCount" type="info">
+      <div @click="handleLike(articleId)" class="quick-item" :class="isLike ? 'isLike' : ''">
         <i class="iconfont icon-good"></i>
       </div>
     </el-badge>
-    <el-badge :value="articleInfo.commentCount" type="info">
+    <el-badge :value="commentCount" type="info">
       <div class="quick-item" @click="handleGoToPosition('view-comment')">
         <i class="iconfont icon-comment"></i>
       </div>
     </el-badge>
-    <el-badge :value="1" type="info" :hidden="true" v-if="attachment">
+    <el-badge :value="1" type="info" :hidden="true" v-if="haveAttachment">
       <div class="quick-item" @click="handleGoToPosition('view-attachment')">
         <i class="iconfont icon-attachment"></i>
       </div>
@@ -23,10 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { ArticleInfoType, AttachmentType } from '@/type';
 const props = defineProps<{
-  articleInfo: ArticleInfoType;
-  attachment: AttachmentType | null;
+  articleId: string;
+  gooCount: number;
+  commentCount: number;
+  haveAttachment: boolean;
   isLike: boolean;
 }>();
 const emit = defineEmits<{
@@ -34,7 +31,7 @@ const emit = defineEmits<{
 }>();
 
 function handleGoToPosition(id: string) {
-  goToPosition(id);
+  goToPosition(id, 120);
 }
 
 // 点赞

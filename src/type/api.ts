@@ -33,7 +33,7 @@ export interface CommentType {
   goodCount: number; // 点赞数
   status: number; // 状态
   likeType: number | null; // 登录用户是否已经点赞 null未点赞 1:已点赞
-  children: Comment[] | null; // 下级评论
+  children: CommentType[] | null; // 下级评论
 }
 
 // 评论列表

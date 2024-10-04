@@ -78,7 +78,7 @@ const submitForm = () => {
       if (!result) return;
       userStore.$patch((state) => {
         state.username = result.data.nickName;
-        state.remember = formData.remember;
+        state.remember = formData.remember!;
         state.isLogin = true;
         state.userId = result.data.userId;
         state.isAdmin = result.data.isAdmin ?? false;

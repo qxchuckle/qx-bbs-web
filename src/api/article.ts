@@ -8,7 +8,7 @@ export const requestArticleDetail = async (id: string) => {
       articleId: id,
     },
   });
-  if (!result) return;
+  if (!result) return Promise.reject(false);
   console.log(result.data);
   return result.data;
 };
@@ -23,7 +23,7 @@ export const requestLikeArticle = async (id: string) => {
     needLogin: true,
     showLoading: false,
   });
-  if (!result) return Promise.reject();
+  if (!result) return Promise.reject(false);
   return result.data;
 };
 
@@ -36,7 +36,7 @@ export async function requestDownloadAttachmentInfo(fileId: string) {
     },
     needLogin: true,
   });
-  if (!result) return;
+  if (!result) return Promise.reject(false);
   return result.data;
 }
 

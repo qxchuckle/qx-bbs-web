@@ -23,7 +23,7 @@
           </div>
           <!-- 评论区 -->
           <div class="comment-panel child-panel" id="view-comment">
-            <ArticleComment :article-info="articleInfo"></ArticleComment>
+            <ArticleComment :article-info="articleInfo" ref="commentRef"></ArticleComment>
           </div>
         </div>
         <!-- 侧边栏 -->
@@ -33,8 +33,10 @@
         <!-- 左侧快捷操作栏 -->
         <div class="quick-panel sticky">
           <QuickList
-            :article-info="articleInfo"
-            :attachment="attachment"
+            :article-id="articleInfo.articleId"
+            :have-attachment="!!attachment"
+            :goo-count="articleInfo.goodCount"
+            :comment-count="commentRef?.commentCount || 0"
             :is-like="isLike"
             @like-article="refresh"
           ></QuickList>
@@ -46,6 +48,7 @@
 
 <script setup lang="ts">
 import { ArticleInfoType, AttachmentType } from '@/type';
+import ArticleComment from '@/components/article/detail/ArticleComment.vue';
 
 const route = useRoute();
 // 文章信息
@@ -69,7 +72,7 @@ onBeforeMount(() => {
 });
 
 // 刷新
-const refresh = (id: string) => {
+const refresh = (id?: string) => {
   getArticleDetail();
 };
 
@@ -78,6 +81,8 @@ const menuStore = useMenuStore();
 onUpdated(() => {
   menuStore.updateCurMenu(articleInfo.value?.pBoardId || null, articleInfo.value?.boardId || null);
 });
+
+const commentRef = ref<InstanceType<typeof ArticleComment> | null>(null);
 </script>
 
 <style scoped lang="scss">

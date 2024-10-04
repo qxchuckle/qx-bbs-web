@@ -33,6 +33,12 @@ export interface AttachmentType {
 
 // 评论排序枚举
 export enum CommentOrderEnum {
-  new = 0,
-  hot = 1,
+  new = 1,
+  hot = 0,
+}
+
+// 评论置顶类型
+export enum CommentTopType {
+  top = 1,
+  cancel = 0,
 }

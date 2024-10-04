@@ -65,7 +65,7 @@ export const formValidate = (form: Form | null) => {
     } else {
       form.validate((valid: boolean) => {
         if (!valid) {
-          message.warning('请检查表单是否填写正确');
+          // message.warning('请检查表单是否填写正确');
           reject('验证失败');
         }
         resolve('验证成功');
@@ -75,14 +75,15 @@ export const formValidate = (form: Form | null) => {
 };
 
 // 滚动页面到指定位置
-export function goToPosition(id?: string) {
+export function goToPosition(id?: string, top = 0) {
   if (!id) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top, behavior: 'smooth' });
     return;
   }
   const el = document.querySelector('#' + id);
   if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const elTop = el.getBoundingClientRect().top;
+    window.scrollBy({ top: elTop - top, behavior: 'smooth' });
   }
 }
 

@@ -45,8 +45,10 @@ export const apiList = {
     // 获取文章评论
     loadComment: '/api/comment/loadComment',
     // 发表评论
-    addComment: '/api/forum/addComment',
-    // 删除评论
-    deleteComment: '/api/forum/deleteComment',
+    postComment: '/api/comment/postComment',
+    // 评论点赞
+    doLike: '/api/comment/doLike',
+    // 置顶/取消置顶评论
+    topComment: '/api/comment/changeTopType',
   },
 };

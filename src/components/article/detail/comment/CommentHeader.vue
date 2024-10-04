@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { CommentOrderEnum, CommentDataType } from '@/type';
+import { CommentDataType, CommentOrderEnum } from '@/type';
 const refreshComments = inject<() => void>('refreshComments')!;
 const props = defineProps<{
   orderType: CommentOrderEnum;
@@ -46,10 +46,10 @@ function changeOrderType(type: CommentOrderEnum) {
   line-height: 1;
   align-items: center;
   .comment-title {
-    font-size: 1.5rem;
+    font-size: 1.666667rem;
     margin-right: 30px;
     .comment-count {
-      font-size: 1.166667rem;
+      font-size: 1.333333rem;
       color: $FontGrayColor;
     }
   }
@@ -58,7 +58,7 @@ function changeOrderType(type: CommentOrderEnum) {
     gap: 5px;
     padding-top: 5px;
     .menu-item {
-      font-size: 1.166667rem;
+      font-size: 1.333333rem;
       color: $FontGrayColor;
       transition: color 0.3s;
       cursor: pointer;

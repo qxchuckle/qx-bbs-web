@@ -14,10 +14,12 @@ export const usePageStore = defineStore('pageStore', {
   actions: {
     // 显示登陆框
     showLogin() {
+      toggleHtmlScroll(false);
       this.isShowLogin = true;
     },
-    // 隐藏登陆框s
+    // 隐藏登陆框
     hideLogin() {
+      toggleHtmlScroll(true);
       this.isShowLogin = false;
     },
   },

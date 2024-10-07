@@ -159,6 +159,7 @@ const handleRemoveImage = () => {
   width: fit-content;
   margin-top: 10px;
   i.icon-remove {
+    cursor: pointer;
     position: absolute;
     right: -8px;
     top: -8px;

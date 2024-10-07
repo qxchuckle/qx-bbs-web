@@ -2,7 +2,9 @@
   <div>
     <div class="user-panel">
       <el-space wrap :size="8">
-        <el-button type="primary">发帖<i class="iconfont icon-add"></i></el-button>
+        <el-button type="primary" @click="toNewArticle"
+          >发帖<i class="iconfont icon-add"></i
+        ></el-button>
         <el-button type="primary">搜索<i class="iconfont icon-search"></i></el-button>
         <div class="user-info" v-if="userStore.isLogin">
           <el-dropdown>
@@ -34,8 +36,8 @@
           </el-dropdown>
         </div>
         <el-button-group v-else>
-          <el-button type="primary" plain @click="login">登录</el-button>
-          <el-button type="primary" plain @click="register">注册</el-button>
+          <el-button type="primary" plain @click="toLogin">登录</el-button>
+          <el-button type="primary" plain @click="toRegister">注册</el-button>
         </el-button-group>
       </el-space>
     </div>
@@ -54,13 +56,17 @@ const userStore = useUserStore();
 const pageStore = usePageStore();
 const type = ref(AuthFormType.login);
 
-const login = () => {
+const toLogin = () => {
   type.value = AuthFormType.login;
   pageStore.showLogin();
 };
-const register = () => {
+const toRegister = () => {
   type.value = AuthFormType.register;
   pageStore.showLogin();
+};
+
+const toNewArticle = () => {
+  router.push({ name: 'NewArticle' });
 };
 </script>
 

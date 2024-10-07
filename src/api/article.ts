@@ -1,4 +1,9 @@
-import { GetArticleDetailType, GoodArticleType, DownloadAttachmentInfoType } from '@/type';
+import {
+  GetArticleDetailType,
+  GoodArticleType,
+  DownloadAttachmentInfoType,
+  GetArticleUpdateType,
+} from '@/type';
 
 // 获取文章详情
 export const requestArticleDetail = async (id: string) => {
@@ -9,7 +14,6 @@ export const requestArticleDetail = async (id: string) => {
     },
   });
   if (!result) return Promise.reject(false);
-  console.log(result.data);
   return result.data;
 };
 
@@ -59,7 +63,7 @@ export async function requestDownloadAttachment(
   try {
     let msg;
     if (downloadAttachmentInfo.haveDownload) {
-      msg = `当前剩余 ${downloadAttachmentInfo.userIntegral} 积分，您已下载过该附件，是否再次下载？`;
+      msg = `您已下载过该附件，本次不消耗积分，是否再次下载？`;
     } else {
       msg = `当前剩余 ${downloadAttachmentInfo.userIntegral} 积分，下载将扣除 ${filePrice} 积分！`;
     }
@@ -73,3 +77,15 @@ export async function requestDownloadAttachment(
     return Promise.reject(false);
   }
 }
+
+// 获取文章更新信息
+export const requestArticleUpdateDetail = async (id: string) => {
+  const result = await request<GetArticleUpdateType>({
+    url: apiList.article.getArticleUpdate,
+    params: {
+      articleId: id,
+    },
+  });
+  if (!result) return Promise.reject(false);
+  return result.data;
+};

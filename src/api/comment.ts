@@ -1,4 +1,4 @@
-import { CommentDataType, CommentOrderEnum, CommentType, CommentTopType } from '@/type';
+import { CommentDataType, CommentOrderEnum, CommentType, CommentTopEnum } from '@/type';
 import type { UploadRawFile } from 'element-plus';
 
 // 获取文章评论
@@ -59,7 +59,7 @@ export const requestLikeComment = async (commentId: number) => {
 };
 
 // 置顶/取消置顶评论
-export const requestTopComment = async (commentId: number, topType: CommentTopType) => {
+export const requestTopComment = async (commentId: number, topType: CommentTopEnum) => {
   const result = await request<CommentType>({
     url: apiList.comment.topComment,
     params: {

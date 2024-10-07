@@ -39,6 +39,14 @@ export const apiList = {
     downloadAttachment: '/api/forum/attachmentDownload',
     // 获取下载信息，积分、是否下载过
     downloadAttachmentInfo: '/api/forum/getUserDownloadInfo',
+    // 发布文章
+    postArticle: '/api/forum/postArticle',
+    // 修改文章
+    updateArticle: '/api/forum/updateArticle',
+    // 搜索文章
+    searchArticle: '/api/forum/search',
+    // 获取文章更新信息
+    getArticleUpdate: '/api/forum/articleDetail4Update',
   },
   // 评论相关
   comment: {
@@ -50,5 +58,12 @@ export const apiList = {
     doLike: '/api/comment/doLike',
     // 置顶/取消置顶评论
     topComment: '/api/comment/changeTopType',
+  },
+  // 图片相关
+  image: {
+    // 上传图片
+    upload: '/api/file/uploadImage',
+    // 获取图片 /api/file/getImage/{imageFolder}/{imageName}
+    getImage: '/api/file/getImage/',
   },
 };

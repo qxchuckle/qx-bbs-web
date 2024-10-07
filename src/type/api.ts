@@ -1,4 +1,5 @@
 import { ArticleInfoType, AttachmentType } from './article';
+import { PublishEditorEnum } from './edit';
 
 // 获取文章详情
 export interface GetArticleDetailType {
@@ -43,4 +44,13 @@ export interface CommentDataType {
   pageNo: number; //页码
   pageTotal: number; //总页数
   list: CommentType[] | null; //评论列表
+}
+
+// 获取修改文章详情
+export interface GetArticleUpdateType {
+  forumArticle: ArticleInfoType & {
+    editorType: PublishEditorEnum;
+    markdownContent: string;
+  };
+  attachment?: AttachmentType;
 }

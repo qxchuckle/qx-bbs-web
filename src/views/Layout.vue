@@ -18,5 +18,7 @@ const route = useRoute();
 .main {
   margin: 0 auto;
   padding: 50px 0 0;
+  // min-height: 100vh;
+  // height: 100%;
 }
 </style>

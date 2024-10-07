@@ -38,7 +38,7 @@ export enum CommentOrderEnum {
 }
 
 // 评论置顶类型
-export enum CommentTopType {
+export enum CommentTopEnum {
   top = 1,
   cancel = 0,
 }

@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { MenuListType } from '@/type';
+const route = useRoute();
 const router = useRouter();
 const menuStore = useMenuStore();
 const props = defineProps<{
@@ -43,6 +44,12 @@ const toBoard = (pid: number, cid: number) => {
     });
   }
 };
+watch(
+  () => route.name,
+  () => {
+    menuStore.updateCurMenu(null, null);
+  },
+);
 </script>
 
 <style scoped lang="scss">
